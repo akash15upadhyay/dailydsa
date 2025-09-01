@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
+// Defines the structure for a node in the N-ary tree.
+// It's a generic class, so it can hold any data type.
+class NArrayTreeNode<E> {
+    E data;
+    ArrayList<NArrayTreeNode<E>> children;
+
+    public NArrayTreeNode(E data) {
+        this.data = data;
+        this.children = new ArrayList<>();
+    }
+}
+
+public class NArrayTree {
+    public ArrayList<Integer> BFS(NArrayTreeNode<Integer> root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res; // Return empty list if the tree is empty
+        }
+
+        // A queue is used to keep track of nodes to visit.
+        Queue<NArrayTreeNode<Integer>> queue = new LinkedList<>();
+        queue.offer(root); // Start with the root node.
+
+        // Loop as long as there are nodes to visit.
+        while (!queue.isEmpty()) {
+            // Dequeue the next node to visit.
+            NArrayTreeNode<Integer> node = queue.poll();
+            res.add(node.data); // Add its data to the result list.
+
+            // Enqueue all children of the current node.
+            for (NArrayTreeNode<Integer> child : node.children) {
+                if (child != null) {
+                    queue.offer(child);
+                }
+            }
+        }
+
+        return res;
+    }
+}
