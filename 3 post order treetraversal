@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+
+// Defines the structure for each node in the binary tree.
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    // Constructor to create a new node.
+    Node(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Main function to start the postorder traversal.
+    ArrayList<Integer> postOrder(Node root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        postOrderTraversal(root, result);
+        return result;
+    }
+
+    // Recursive helper function to perform the traversal.
+    private void postOrderTraversal(Node root, ArrayList<Integer> result) {
+        if (root == null) {
+            return;
+        }
+        postOrderTraversal(root.left, result);   // 1. Recurse Left
+        postOrderTraversal(root.right, result);  // 2. Recurse Right
+        result.add(root.data);                   // 3. Process Root
+    }
+}
